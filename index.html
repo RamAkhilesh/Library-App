@@ -12,17 +12,24 @@
     </nav>
     <main>
         <div class="message">
-            <h2>No books to display</h2>
+            <h1>No books to display</h1>
             <span>Start a new list by adding new book</span>
         </div>
         <table class="table">
+            <colgroup>
+                <col span="1" style="width: 30%;" />
+                <col span="1" style="width: 30%;" />
+                <col span="1" style="width: 10%;" />
+                <col span="1" style="width: 15%;" />
+                <col span="1" style="width: 10%;" />
+            </colgroup>
             <thead id="thead">
                 <tr>
-                    <td><b>Title</b></td>
-                    <td><b>Author</b></td>
-                    <td><b>Pages</b></td>
-                    <td><b>Status</b></td>
-                    <td><b>Delete</b></td>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Status</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
@@ -30,7 +37,7 @@
     </main>
     <div class="add">
         <div class="add-form">
-            <span>Add new book</span>
+            <span class="form-heading">Add new book</span><hr>
             <form>
                 <label for="title">Title</label>
                 <input type="text" id="title" required><br>
@@ -40,12 +47,12 @@
                 <input type="number" id="pages" min="1" required><br>
                 <fieldset>
                     <legend>Read it before?</legend>
-                    <input type="radio" name="status" id="read" value="true" required>
+                    <input type="radio" name="status" id="read" value="Yes">
                     <label for="read">Yes</label><br>
-                    <input type="radio" name="status" id="unread" value="false" required>
+                    <input type="radio" name="status" id="unread" value="No">
                     <label for="unread">No</label><br>
                 </fieldset>
-                <input type="submit" value="Add">
+                <input type="submit" value="Add" class="btn-submit">
                 <input type="button" value="Cancel" class="btn-cancel">
             </form>
         </div>

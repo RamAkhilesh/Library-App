@@ -19,7 +19,7 @@ let myLibrary = [
     }
 ];
 
-function Book(title, author, pages, status=false) {
+function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -31,8 +31,10 @@ function addNewBook() {
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const pages = document.getElementById("pages").value;
-    // Converting the string value to boolean
-    const status = document.querySelector('input[name="status"]:checked').value == "true" ? true : false;
+    let read = document.getElementById("read");
+    let status = false;
+    if(read.checked)
+        status = true;
     myLibrary.push(new Book(title, author, pages, status));
     render();
 }
@@ -42,8 +44,8 @@ document.querySelector(".add-form").addEventListener("submit", function(event) {
     event.preventDefault();
     document.querySelector(".add-form").style.display = "none";
     document.querySelector(".btn-add").style.display = "block";
-    document.querySelector("form").reset();
     addNewBook();
+    document.querySelector("form").reset();
 });
 
 // Returns "Read" or "Yet to read" button based on the input boolean
@@ -97,7 +99,7 @@ document.querySelector(".btn-cancel").addEventListener("click", function() {
 
 document.querySelector("#tbody").addEventListener("click", function(e){
     const btn = e.target;
-
+    
     // Toggle between "Read" or "Yet to read"
     if(btn.classList.contains("toggle")) {
         let currentRow = btn.parentNode.parentNode;
@@ -106,18 +108,19 @@ document.querySelector("#tbody").addEventListener("click", function(e){
         btn.classList.toggle("unread");
         btn.classList.toggle("read");
         if(btn.classList.contains("read"))
-            btn.textContent = "Read";
+        btn.textContent = "Read";
         else
-            btn.textContent = "Yet to read";
+        btn.textContent = "Yet to read";
     }
-
+    
     // Delete an entry
     else if(btn.classList.contains("btn-delete")) {
         let currentRow = btn.parentNode.parentNode;
         let index = currentRow.getAttribute("data-id");
+        console.log(index);
         myLibrary.splice(index, 1);
         console.log(myLibrary);
         document.querySelector("#tbody").removeChild(currentRow);
-        checkMyLibrary();
+        render();
     }
 });
